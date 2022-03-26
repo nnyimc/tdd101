@@ -1,0 +1,57 @@
+Dans le développement piloté par les tests (TDD), vous avez besoin d'écrire d'abord les tests pour vous guider sur la manière dont le code doit se comporter. 
+Avec le procédé rouge-vert-refactor, vous écrivez d'abord un test, vous faites en sorte qu'il compile un minimum, mais il échoue (rouge). 
+Puis vous écrivez le code de la fonctionnalité pour faire passer le test (vert). 
+Enfin, vous améliorez la lisibilité et l'architecture du code, sans impacter le succès du test (refactor).
+
+Une fonctionnalité représentée par une méthode possède en principe plusieurs scénarios :
+un principal où tout se passe bien ;
+et d'autres scénarios, correspondant à des cas limites, des cas d'erreur, ou d'autres cas alternatifs.
+Vous devez écrire un test pour chacun de ces scénarios, ou tout au moins les plus représentatifs pour la même méthode/unité de code.
+
+
+En utilisant JUnit et ses annotations standard, vous n'avez pas besoin de vous occuper de lancer manuellement les méthodes de test, à condition de bien utiliser les annotations, notamment @Test sur une méthode de test. 
+C'est aussi pour cette raison que les méthodes  assertEquals  ou  assertTrue  de JUnit sont à utiliser par rapport au mot clé assert.
+
+
+La technique rouge-vert-refactor est le procédé qui applique le principe du TDD, à savoir coder des tests pour faire développer ensuite le code de la fonctionnalité en conformité avec les tests.
+
+
+AssertJ propose une bibliothèque d'assertions combinables et particulièrement adaptées à l'autocomplétion des IDE. 
+Grâce au mot clé assertThat, vous pouvez remplacer assertEquals et assertTrue de JUnit et transformer des assertions très "informaticiennes" en assertions plus lisibles et plus sophistiquées. 
+JUnit reste toujours utilisé pour organiser le lancement des tests, car AssertJ ne gère que les assertions.
+
+
+Les tests unitaires sont à la base de la pyramide, donc les plus nombreux. 
+Ils sont rapides, et permettent une détection très tôt de bugs, afin de faciliter leur correction. 
+Ils testent les unités de code de manière la plus autonome possible et ne représentent pas forcément une utilisation réelle et globale de l'application.
+
+Très souvent, vous avez besoin d'initialiser votre classe à tester avant chaque test. 
+Si cette initialisation est la même à chaque fois, il est possible de définir une méthode contenant cette initialisation. 
+Il suffit alors juste de l'annoter @BeforeEach. 
+Les autres annotations existent mais correspondent à des comportements différents: @AfterEach, @BeforeAll, @AfterAll...
+
+
+Le mot clé @ParameterizedTest remplace @Test pour déclarer un test qui sera exécuté plusieurs fois. 
+Il se peut que certains tests réussissent et d'autres échouent, en fonction du paramètre donné. 
+Cela permet de tester un même comportement en fonction de données différentes, sans devoir copier-coller du code.
+
+
+L'annotation @Timeout de JUnit 5 permet de donner un temps limite d'exécution du test, en secondes. 
+Le test peut alors échouer de deux façons : 
+- soit l'assertion du test lui-même fait échouer le test, 
+- soit le temps total d'exécution dépasse le nombre de secondes indiqué en paramètre de Timeout.
+
+
+JaCoCo est l'outil qui donne des statistiques de couverture de code par les tests. Il est utilisable avec Maven ou Eclipse.
+Maven est l'outil permettant de construire l'application à partir des sources et de lancer diverses tâches. 
+Surefire est un plugin de Maven qui s'occupe du lancement des tests. 
+OWASP est un organisme qui offre un ensemble de ressources et d'outils pour vérifier la sécurité des applications.
+
+
+- SonarCloud -  
+Les grades A à E donnent une indication de qualité en fonction des types d'anomalies, A est la qualité la plus élevée et E la plus basse. 
+E signifie qu'au moins une anomalie bloquante, pour le type donné, a été détectée.
+D indique au moins une anomalie critique ;
+C indique au moins une anomalie majeure ;
+B indique au moins une anomalie mineure ;
+A n'indique aucune anomalie mineure.
